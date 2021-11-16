@@ -1,6 +1,5 @@
 CREATE DATABASE IF NOT EXISTS kp_edgar;
 USE kp_edgar;
-
 CREATE TABLE IF NOT EXISTS user_type (
 	id INT AUTO_INCREMENT NOT NULL,
 	id_person INT,
