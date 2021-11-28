@@ -11,5 +11,6 @@
       <TextField fx:id="login" layoutX="210.0" layoutY="97.0" prefHeight="37.0" prefWidth="180.0" promptText="Логин" />
       <Label layoutX="288.0" layoutY="270.0" text="Или" />
       <Label fx:id="toHelp" layoutX="211.0" layoutY="63.0" prefHeight="16.0" prefWidth="180.0" textFill="RED" />
+      <Label fx:id="isAccountExist" layoutX="185.0" layoutY="63.0" prefHeight="16.0" prefWidth="321.0" textFill="RED" />
    </children>
 </AnchorPane>

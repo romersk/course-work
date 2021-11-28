@@ -3,6 +3,7 @@ package database;
 import database.command.*;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,9 +37,24 @@ public class MyDatabase{
         command.execute();
     }
 
-    public ResultSet select(String query) throws SQLException {
+    public ArrayList<String[]> select(String query) throws SQLException {
         Command command = new SelectCommand(query, statemnt);
-        return command.execute().getResultSet();
+        ArrayList<String[]> result = new ArrayList<String[]>();
+        try {
+            ResultSet resultSet = command.execute().getResultSet();
+            int count = resultSet.getMetaData().getColumnCount();
+
+            while (resultSet.next()) {
+                String[] arrayString = new String[count];
+                for (int i = 1;  i <= count; i++)
+                    arrayString[i - 1] = resultSet.getString(i);
+
+                result.add(arrayString);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public void delete(String query) {

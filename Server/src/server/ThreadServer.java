@@ -10,15 +10,14 @@ import java.util.logging.Logger;
 
 public class ThreadServer extends Thread{
     private Socket socket;
-    private BufferedReader in;
-    private PrintWriter out;
+    private ObjectInputStream in;
     private MyDatabase database;
+    private ObjectOutputStream out;
 
     public ThreadServer(Socket s) throws IOException, ClassNotFoundException{
         socket = s;
-        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket
-                .getOutputStream())), true);
+        in = new ObjectInputStream(socket.getInputStream());
+        out = new ObjectOutputStream(socket.getOutputStream());
         try {
             database = new MyDatabase();
             System.out.println("Сервер соединен с базой данных");
@@ -30,29 +29,25 @@ public class ThreadServer extends Thread{
     }
 
     public void run() {
-        Integer idOperation;
-        ServerWork obj = new ServerWork(in, out, database);
+        Integer idOperation = -1;
+        ServerWork obj = new ServerWork(in, database, out);
         try {
             while (true) {
-                String bufString = in.readLine();
-                if (bufString.equals("END")) {
-                    database.close();
-                    System.out.println("Сервер отсоединен от базы данных");
-                    break;
-                }
-                idOperation = Integer.parseInt(bufString);
+                idOperation = (Integer) in.readObject();
                 obj.getId(idOperation);
             }
-            System.out.println("Клиент был отсоединен");
         }
         catch (IOException ex) {
             System.err.println("IO Exception");
+            System.out.println("Клиент был отключен");
         } catch (SQLException ex) {
             Logger.getLogger(ThreadServer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally {
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
             try {
                 socket.close();
+                database.close();
             }
             catch (IOException ex) {
                 System.err.println("Socket not closed");

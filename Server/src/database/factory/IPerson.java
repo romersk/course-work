@@ -1,13 +1,14 @@
 package database.factory;
 
 import model.Person;
-import model.User;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface IPerson {
     void insert(Person obj);
-    Person selectPerson(User obj);
-    void delete(Person obj);
-    ArrayList<Person> findAll();
+    void update(Person obj, int id);
+    Person selectPerson(int id) throws SQLException;
+    void delete(int id);
+    ArrayList<Person> findAll() throws SQLException;
 }

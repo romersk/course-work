@@ -6,26 +6,32 @@ import java.net.Socket;
 
 public class Client {
     private Socket socket;
-    private BufferedReader reader;
-    private BufferedWriter writer;
+    private ObjectOutputStream writer;
+    private ObjectInputStream objectInputStream;
 
     public Client(InetAddress ip, int port) {
         try {
             this.socket = new Socket(ip, port);
-            this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            this.writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            this.writer = new ObjectOutputStream(socket.getOutputStream());
+            this.objectInputStream = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void writeLine(String message) throws IOException {
-        writer.write(message);
-        writer.newLine();
-        writer.flush();
+        writer.writeObject(message);
+    }
+
+    public void writeInt(int choice) throws IOException {
+        writer.writeObject(choice);
     }
 
     public String readLine() throws IOException {
-        return reader.readLine();
+        return objectInputStream.readLine();
+    }
+
+    public Object getObject() throws IOException, ClassNotFoundException {
+        return objectInputStream.readObject();
     }
 }
