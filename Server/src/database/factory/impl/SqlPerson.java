@@ -38,13 +38,13 @@ public class SqlPerson implements IPerson {
                 + obj.getIdUser()
                 + ", person.id_place="
                 + obj.getIdWorkPlace()
-                + ", person.first_name="
+                + ", person.first_name='"
                 + obj.getFirstName()
-                + ", person.last_name="
+                + "', person.last_name='"
                 + obj.getLastName()
-                + ", person.address="
+                + "', person.address='"
                 + obj.getAddress()
-                + "  WHERE person.id=" + id;
+                + "'  WHERE person.id=" + id;
         dbConnection.update(str);
     }
 

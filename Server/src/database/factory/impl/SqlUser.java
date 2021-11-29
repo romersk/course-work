@@ -26,7 +26,16 @@ public class SqlUser implements IUser {
 
     @Override
     public void update(User obj, int id) {
-
+        String str = "UPDATE user_type SET user_type.id_person="
+                + obj.getIdPerson()
+                + ", user_type.login='"
+                + obj.getLogin()
+                + "', user_type.pass='"
+                + obj.getPassword()
+                + "', user_type.role='"
+                + obj.getRole()
+                + "'  WHERE user_type.id=" + id;
+        dbConnection.update(str);
     }
 
     @Override
