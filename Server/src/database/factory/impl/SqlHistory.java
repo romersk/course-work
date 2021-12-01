@@ -12,7 +12,7 @@ public class SqlHistory implements IHistory {
     private static SqlHistory instance;
     private final MyDatabase dbConnection;
 
-    private SqlHistory() throws SQLException, ClassNotFoundException {
+    public SqlHistory() throws SQLException, ClassNotFoundException {
         dbConnection = MyDatabase.getInstance();
     }
 
@@ -25,10 +25,11 @@ public class SqlHistory implements IHistory {
     }
 
     @Override
-    public void insert(History obj) {
+    public int insert(History obj) {
         String str = "INSERT INTO history (id_user, id_salary) VALUES(" + obj.getIdUser()
-                + ", " + obj.getIdSalary() + ")";
-        dbConnection.insert(str);
+                + ", " + obj.getIdSalary() + ") RETURNING id";
+        ArrayList<String[]> result = dbConnection.insert(str);
+        return Integer.parseInt(result.get(0)[0]);
     }
 
     @Override

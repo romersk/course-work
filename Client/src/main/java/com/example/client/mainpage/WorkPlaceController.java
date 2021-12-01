@@ -1,6 +1,6 @@
 package com.example.client.mainpage;
 
-import com.example.client.Data;
+import com.example.client.data.Data;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -180,6 +180,7 @@ public class WorkPlaceController {
     private void refreshTable() throws IOException, ClassNotFoundException {
         Data data = Data.getInstance();
         data.getClient().writeInt(2);
+        data.getClient().writeObject("WorkPlace");
         list = (ArrayList<WorkPlace>) data.getClient().getObject();
         ObservableList<WorkPlace> listOne = FXCollections.observableArrayList(list);
 

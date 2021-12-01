@@ -1,15 +1,9 @@
 package server;
 
 import database.MyDatabase;
-import database.factory.IPerson;
-import database.factory.IUser;
-import database.factory.IWorkPlace;
-import database.factory.impl.SqlPerson;
-import database.factory.impl.SqlUser;
-import database.factory.impl.SqlWorkPlace;
-import model.Person;
-import model.User;
-import model.WorkPlace;
+import database.factory.*;
+import database.factory.impl.*;
+import model.*;
 
 import java.io.*;
 import java.sql.SQLException;
@@ -33,7 +27,7 @@ public class ServerWork {
                 signingIn();
                 break;
             case 2:
-                getWorkPlaces();
+                getAllEntities();
                 break;
             case 3:
                 findUserByLogin();
@@ -58,6 +52,27 @@ public class ServerWork {
         }
     }
 
+
+    private void getAllEntities() throws SQLException, ClassNotFoundException, IOException{
+        String type = (String) in.readObject();
+        switch (type) {
+            case "WorkPlace": {
+                IWorkPlace iWorkPlace = new SqlWorkPlace();
+                ArrayList<WorkPlace> list = iWorkPlace.findAll();
+                out.writeObject(list);
+                break;
+            }
+            case "User": {
+                IUser iUser = new SqlUser();
+                ArrayList<User> list = iUser.findAll();
+                out.writeObject(list);
+                break;
+            }
+            default:
+                break;
+        }
+    }
+
     private void deleteEntityById() throws IOException, ClassNotFoundException, SQLException {
         String type = (String) in.readObject();
         int id = (int) in.readObject();
@@ -66,6 +81,12 @@ public class ServerWork {
             {
                 IWorkPlace iWorkPlace = new SqlWorkPlace();
                 iWorkPlace.delete(id);
+                break;
+            }
+            case "User":
+            {
+                IUser iUser = new SqlUser();
+                iUser.delete(id);
                 break;
             }
             default:
@@ -99,6 +120,7 @@ public class ServerWork {
                 int idUser = (int) in.readObject();
                 int idPerson = (int) in.readObject();
                 user.setIdPerson(idPerson);
+                user.setIdUser(idUser);
                 IUser iUser = new SqlUser();
                 iUser.update(user, idUser);
                 break;
@@ -156,6 +178,22 @@ public class ServerWork {
                 out.writeObject(id);
                 break;
             }
+            case "Salary":
+            {
+                Salary salary = (Salary) in.readObject();
+                ISalary iSalary = new SqlSalary();
+                int id = iSalary.insert(salary);
+                out.writeObject(id);
+                break;
+            }
+            case "History":
+            {
+                History history = (History) in.readObject();
+                IHistory iHistory = new SqlHistory();
+                int id = iHistory.insert(history);
+                out.writeObject(id);
+                break;
+            }
             default:
                 break;
         }
@@ -175,12 +213,6 @@ public class ServerWork {
         IUser iUser = new SqlUser();
         User user = iUser.selectUserByLogin(login);
         out.writeObject(user);
-    }
-
-    private void getWorkPlaces() throws SQLException, ClassNotFoundException, IOException {
-        IWorkPlace iWorkPlace = new SqlWorkPlace();
-        ArrayList<WorkPlace> list = iWorkPlace.findAll();
-        out.writeObject(list);
     }
 
     private void signingIn() throws IOException, SQLException, ClassNotFoundException {

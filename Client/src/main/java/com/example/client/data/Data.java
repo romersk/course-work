@@ -1,10 +1,12 @@
-package com.example.client;
+package com.example.client.data;
 
+import com.example.client.Client;
 import model.User;
 
 public final class Data {
 
     private User user;
+    private User editUser;
     private Client client;
 
     private final static Data instance = new Data();
@@ -29,5 +31,13 @@ public final class Data {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public User getEditUser() {
+        return editUser;
+    }
+
+    public void setEditUser(User editUser) {
+        this.editUser = editUser;
     }
 }

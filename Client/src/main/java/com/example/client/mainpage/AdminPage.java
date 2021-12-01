@@ -1,6 +1,6 @@
 package com.example.client.mainpage;
 
-import com.example.client.Data;
+import com.example.client.data.Data;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -50,6 +50,18 @@ public class AdminPage {
     }
 
     public void toShowData(ActionEvent actionEvent) {
+        buttDataUsers.getScene().getWindow().hide();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/com/example/client/user-control.fxml"));
+        try {
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Parent root = fxmlLoader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     public void toManupWork(ActionEvent actionEvent) {

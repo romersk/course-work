@@ -1,6 +1,6 @@
 package com.example.client.mainpage;
 
-import com.example.client.Data;
+import com.example.client.data.Data;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,7 +15,6 @@ import model.User;
 import model.WorkPlace;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -40,10 +39,14 @@ public class PersonalInfo {
         Data data = Data.getInstance();
         buttToBack.getScene().getWindow().hide();
         FXMLLoader fxmlLoader = new FXMLLoader();
-        if (Objects.equals(data.getUser().getRole(), "Admin")) {
-            fxmlLoader.setLocation(getClass().getResource("/com/example/client/admin-page.fxml"));
+        if (data.getEditUser() == null) {
+            if (Objects.equals(data.getUser().getRole(), "Admin")) {
+                fxmlLoader.setLocation(getClass().getResource("/com/example/client/admin-page.fxml"));
+            } else {
+                fxmlLoader.setLocation(getClass().getResource("/com/example/client/user-page.fxml"));
+            }
         } else {
-            fxmlLoader.setLocation(getClass().getResource("/com/example/client/user-page.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/com/example/client/user-control.fxml"));
         }
         try {
             fxmlLoader.load();
@@ -60,19 +63,33 @@ public class PersonalInfo {
         if (isFilled()) {
             Data data = Data.getInstance();
             User user = new User();
-            user.setIdUser(data.getUser().getIdUser());
-            user.setLogin(login.getText());
-            user.setPassword(password.getText());
-            user.setRole(data.getUser().getRole());
+            if (data.getEditUser() == null) {
+                user.setIdUser(data.getUser().getIdUser());
+                user.setLogin(login.getText());
+                user.setPassword(password.getText());
+                user.setRole(data.getUser().getRole());
 
-            data.getUser().setLogin(login.getText());
-            data.getUser().setPassword(password.getText());
+                data.getUser().setLogin(login.getText());
+                data.getUser().setPassword(password.getText());
 
-            data.getClient().writeInt(8);
-            data.getClient().writeObject("Person");
-            data.getClient().writeObject(data.getUser().getIdPerson());
+                data.getClient().writeInt(8);
+                data.getClient().writeObject("Person");
+                data.getClient().writeObject(data.getUser().getIdPerson());
+            } else {
+                user.setIdUser(data.getEditUser().getIdUser());
+                user.setLogin(login.getText());
+                user.setPassword(password.getText());
+                user.setRole(data.getEditUser().getRole());
+
+                data.getEditUser().setLogin(login.getText());
+                data.getEditUser().setPassword(password.getText());
+
+                data.getClient().writeInt(8);
+                data.getClient().writeObject("Person");
+                data.getClient().writeObject(data.getEditUser().getIdPerson());
+            }
+
             Person person = (Person) data.getClient().getObject();
-
             person.setFirstName(name.getText());
             person.setLastName(surname.getText());
             person.setAddress(address.getText());
@@ -80,7 +97,6 @@ public class PersonalInfo {
             data.getClient().writeInt(4);
             data.getClient().writeObject(workPlace.getValue());
             WorkPlace workPlace = (WorkPlace) data.getClient().getObject();
-
             person.setIdWorkPlace(workPlace.getIdWorkPlace());
 
             data.getClient().writeInt(7);
@@ -94,7 +110,6 @@ public class PersonalInfo {
             data.getClient().writeObject(user);
             data.getClient().writeObject(user.getIdPerson());
             data.getClient().writeObject(person.getIdPerson());
-
             this.toBack(actionEvent);
         }
     }
@@ -102,17 +117,27 @@ public class PersonalInfo {
     @FXML
     public void initialize() throws IOException, ClassNotFoundException {
         Data data = Data.getInstance();
-        login.setText(data.getUser().getLogin());
-        password.setText(data.getUser().getPassword());
-        data.getClient().writeInt(8);
-        data.getClient().writeObject("Person");
-        data.getClient().writeObject(data.getUser().getIdPerson());
+        if (data.getEditUser() == null) {
+            login.setText(data.getUser().getLogin());
+            password.setText(data.getUser().getPassword());
+            data.getClient().writeInt(8);
+            data.getClient().writeObject("Person");
+            data.getClient().writeObject(data.getUser().getIdPerson());
+
+        } else {
+            login.setText(data.getEditUser().getLogin());
+            password.setText(data.getEditUser().getPassword());
+            data.getClient().writeInt(8);
+            data.getClient().writeObject("Person");
+            data.getClient().writeObject(data.getEditUser().getIdPerson());
+        }
         Person person = (Person) data.getClient().getObject();
         surname.setText(person.getLastName());
         name.setText(person.getFirstName());
         address.setText(person.getAddress());
 
         data.getClient().writeInt(2);
+        data.getClient().writeObject("WorkPlace");
         ArrayList<WorkPlace> list = (ArrayList<WorkPlace>) data.getClient().getObject();
         ObservableList<String> langs = FXCollections.observableArrayList();
         for (WorkPlace obj:
@@ -153,7 +178,8 @@ public class PersonalInfo {
             data.getClient().writeInt(3);
             data.getClient().writeLine(login.getText());
             User user = (User) data.getClient().getObject();
-            if (user.getIdUser() > 0 && !data.getUser().getLogin().equals(user.getLogin())) {
+            if ((user.getIdUser() > 0 && !data.getUser().getLogin().equals(user.getLogin()))
+            && (!data.getEditUser().getLogin().equals(user.getLogin()))) {
                 labelForLogin.setText("Никнейм занят");
                 answer = false;
             } else  {

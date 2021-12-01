@@ -6,7 +6,7 @@
 <AnchorPane prefHeight="411.0" prefWidth="687.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.mainpage.Registration">
    <children>
       <Button fx:id="buttToBack" layoutX="583.0" layoutY="20.0" mnemonicParsing="false" onAction="#toBack" text="Вернуться" />
-      <Button fx:id="buttReg" layoutX="481.0" layoutY="352.0" mnemonicParsing="false" onAction="#toReg" prefHeight="31.0" prefWidth="160.0" text="Зарегистрироваться" />
+      <Button fx:id="buttReg" layoutX="481.0" layoutY="352.0" mnemonicParsing="false" onAction="#toReg" prefHeight="31.0" prefWidth="160.0" text="Зарегистрировать" />
       <TextField fx:id="surname" layoutX="82.0" layoutY="96.0" prefHeight="31.0" prefWidth="152.0" promptText="Фамилия" />
       <TextField fx:id="name" layoutX="82.0" layoutY="175.0" prefHeight="31.0" prefWidth="152.0" promptText="Имя" />
       <TextField fx:id="address" layoutX="82.0" layoutY="248.0" prefHeight="31.0" prefWidth="152.0" promptText="Адрес" />

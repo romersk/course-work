@@ -25,10 +25,11 @@ public class SqlSalary implements ISalary {
     }
 
     @Override
-    public void insert(Salary obj) {
+    public int insert(Salary obj) {
         String str = "INSERT INTO salary (size, method) VALUES("
-                + obj.getSize() + ",'" + obj.getMethod() + "')";
-        dbConnection.insert(str);
+                + obj.getSize() + ",'" + obj.getMethod() + "') RETURNING id";
+        ArrayList<String[]> result = dbConnection.insert(str);
+        return Integer.parseInt(result.get(0)[0]);
     }
 
     @Override

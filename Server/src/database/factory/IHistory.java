@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface IHistory {
-    void insert(History obj);
+    int insert(History obj);
     History selectHistoryById(int id) throws SQLException;
     void delete(int id);
     ArrayList<History> findAll() throws SQLException;

@@ -1,6 +1,6 @@
 package com.example.client.mainpage;
 
-import com.example.client.Data;
+import com.example.client.data.Data;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,7 +37,12 @@ public class Registration {
     public void toBack(ActionEvent actionEvent) {
         buttToBack.getScene().getWindow().hide();
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/com/example/client/hello-view.fxml"));
+        Data data = Data.getInstance();
+        if (data.getEditUser() == null) {
+            fxmlLoader.setLocation(getClass().getResource("/com/example/client/hello-view.fxml"));
+        } else {
+            fxmlLoader.setLocation(getClass().getResource("/com/example/client/user-control.fxml"));
+        }
         try {
             fxmlLoader.load();
         } catch (IOException e) {
@@ -80,14 +85,20 @@ public class Registration {
             user.setIdPerson(idPerson);
 
             data.getClient().writeObject(7);
+            data.getClient().writeObject("User");
             data.getClient().writeObject(user);
             data.getClient().writeObject(idUser);
             data.getClient().writeObject(idPerson);
 
-            data.setUser(user);
+
             buttReg.getScene().getWindow().hide();
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/com/example/client/user-page.fxml"));
+            if (data.getEditUser() == null) {
+                fxmlLoader.setLocation(getClass().getResource("/com/example/client/user-page.fxml"));
+                data.setUser(user);
+            } else {
+                fxmlLoader.setLocation(getClass().getResource("/com/example/client/user-control.fxml"));
+            }
             try {
                 fxmlLoader.load();
             } catch (IOException e) {
@@ -104,6 +115,7 @@ public class Registration {
     public void initialize() throws IOException, ClassNotFoundException {
         Data data = Data.getInstance();
         data.getClient().writeInt(2);
+        data.getClient().writeObject("WorkPlace");
 
         ArrayList<WorkPlace> list = (ArrayList<WorkPlace>) data.getClient().getObject();
         ObservableList<String> langs = FXCollections.observableArrayList();

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.mainpage.PpSystem">
+    <children>
+        <Button fx:id="buttBack" layoutX="507.0" layoutY="22.0" mnemonicParsing="false" onAction="#toBack" prefHeight="29.0" prefWidth="135.0" text="Вернуться назад" />
+        <TextField fx:id="fieldOne" layoutX="31.0" layoutY="137.0" prefHeight="40.0" prefWidth="171.0" />
+        <TextField fx:id="fieldTwo" layoutX="31.0" layoutY="222.0" prefHeight="40.0" prefWidth="171.0" />
+        <TextField fx:id="result" disable="true" layoutX="422.0" layoutY="299.0" prefHeight="40.0" prefWidth="171.0" />
+        <Label layoutX="28.0" layoutY="92.0" prefHeight="29.0" prefWidth="307.0" text="Часовая тарифная ставка вспом.работника" />
+        <Label layoutX="31.0" layoutY="177.0" prefHeight="29.0" prefWidth="307.0" text="Объем произведенной продукции, ед." />
+        <Label layoutX="372.0" layoutY="276.0" text="Рассчитанная заработная плата" />
+        <Button layoutX="32.0" layoutY="284.0" mnemonicParsing="false" onAction="#toCalculate" prefHeight="29.0" prefWidth="111.0" text="Рассчитать" />
+        <Button fx:id="buttToSave" layoutX="424.0" layoutY="346.0" mnemonicParsing="false" onAction="#toSaveFile" prefHeight="40.0" prefWidth="171.0" text="Сохранить в файл" />
+        <Label fx:id="labelTwo" layoutX="31.0" layoutY="206.0" prefHeight="16.0" prefWidth="171.0" textFill="RED" />
+        <Label fx:id="labelOne" layoutX="31.0" layoutY="121.0" prefHeight="16.0" prefWidth="171.0" textFill="RED" />
+        <TextField fx:id="fieldThree" layoutX="359.0" layoutY="137.0" prefHeight="40.0" prefWidth="165.0" />
+        <Label layoutX="359.0" layoutY="92.0" prefHeight="29.0" prefWidth="307.0" text="Часовая норма вырботки основных рабочих" />
+        <Label layoutX="32.0" layoutY="29.0" text="Косвенно-сдельная система расчета з/п">
+            <font>
+                <Font size="16.0" />
+            </font></Label>
+        <Label fx:id="labelThree" layoutX="359.0" layoutY="121.0" prefHeight="16.0" prefWidth="165.0" textFill="RED" />
+    </children>
+</AnchorPane>

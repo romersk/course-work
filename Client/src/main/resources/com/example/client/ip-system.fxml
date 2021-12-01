@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.mainpage.IpSystem">
+    <children>
+        <Button fx:id="buttBack" layoutX="507.0" layoutY="22.0" mnemonicParsing="false" onAction="#toBack" prefHeight="29.0" prefWidth="135.0" text="Вернуться назад" />
+        <TextField fx:id="fieldOne" layoutX="31.0" layoutY="137.0" prefHeight="40.0" prefWidth="171.0" />
+        <TextField fx:id="fieldTwo" layoutX="31.0" layoutY="222.0" prefHeight="40.0" prefWidth="171.0" />
+        <TextField fx:id="result" disable="true" layoutX="461.0" layoutY="299.0" prefHeight="40.0" prefWidth="171.0" />
+        <Label layoutX="28.0" layoutY="92.0" prefHeight="29.0" prefWidth="307.0" text="Сдельная расценка за 1 ед. продукции, руб" />
+        <Label layoutX="31.0" layoutY="177.0" prefHeight="29.0" prefWidth="307.0" text="Объем произведенной продукции, ед." />
+        <Label layoutX="417.0" layoutY="276.0" text="Рассчитанная заработная плата" />
+        <Button layoutX="32.0" layoutY="278.0" mnemonicParsing="false" onAction="#toCalculate" prefHeight="29.0" prefWidth="111.0" text="Рассчитать" />
+        <Button fx:id="buttToSave" layoutX="467.0" layoutY="346.0" mnemonicParsing="false" onAction="#toSaveFile" prefHeight="40.0" prefWidth="165.0" text="Сохранить в файл" />
+        <Label fx:id="labelTwo" layoutX="31.0" layoutY="206.0" prefHeight="16.0" prefWidth="165.0" textFill="RED" />
+        <Label fx:id="labelOne" layoutX="31.0" layoutY="121.0" prefHeight="16.0" prefWidth="165.0" textFill="RED" />
+      <TextField fx:id="fieldThree" layoutX="359.0" layoutY="137.0" prefHeight="40.0" prefWidth="165.0" />
+      <TextField fx:id="fieldFour" layoutX="359.0" layoutY="222.0" prefHeight="40.0" prefWidth="165.0" />
+      <Label layoutX="359.0" layoutY="92.0" prefHeight="29.0" prefWidth="307.0" text="\% премии за каждый % перевыполнения" />
+      <Label layoutX="32.0" layoutY="29.0" text="Сдельно-примеальная система расчета з/п">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Label fx:id="labelThree" layoutX="359.0" layoutY="121.0" prefHeight="16.0" prefWidth="165.0" textFill="RED" />
+      <Label layoutX="359.0" layoutY="177.0" prefHeight="29.0" prefWidth="307.0" text="\% перевыполнения" />
+      <Label fx:id="labelFour" layoutX="359.0" layoutY="206.0" prefHeight="16.0" prefWidth="165.0" textFill="RED" />
+    </children>
+</AnchorPane>

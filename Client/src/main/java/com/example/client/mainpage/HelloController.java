@@ -1,7 +1,7 @@
 package com.example.client.mainpage;
 
 import com.example.client.Client;
-import com.example.client.Data;
+import com.example.client.data.Data;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
