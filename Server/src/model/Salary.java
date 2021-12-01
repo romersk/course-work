@@ -39,7 +39,7 @@ public class Salary implements Serializable {
 
     @Override
     public String toString() {
-        return "Salary{" +
+        return "Salary = {" +
                 "id=" + idSalary +
                 ", size=" + size +
                 ", method=" + method +

@@ -26,15 +26,26 @@ public class SqlWorkPlace implements IWorkPlace {
 
 
     @Override
-    public void insert(WorkPlace obj) {
+    public int insert(WorkPlace obj) {
         String str = "INSERT INTO work_place (name, address) VALUES('"
-                + obj.getName() + "','" + obj.getAddress() + "')";
-        dbConnection.insert(str);
+                + obj.getName() + "','" + obj.getAddress() + "') RETURNING id";
+        ArrayList<String[]> result = dbConnection.insert(str);
+        return Integer.parseInt(result.get(0)[0]);
     }
 
     @Override
-    public WorkPlace selectWorkPlace(int id) throws SQLException {
-        String str = "SELECT * FROM work_place WHERE id=" + id;
+    public void update(WorkPlace obj, int id) {
+        String str = "UPDATE work_place SET work_place.name='"
+                + obj.getName()
+                + "', work_place.address='"
+                + obj.getAddress()
+                + "'  WHERE work_place.id=" + obj.getIdWorkPlace();
+        dbConnection.update(str);
+    }
+
+    @Override
+    public WorkPlace selectWorkPlace(String name) throws SQLException {
+        String str = "SELECT * FROM work_place WHERE name='" + name +"'";
         ArrayList<String[]> result = dbConnection.select(str);
         WorkPlace workPlace = new WorkPlace();
         for (String[] items: result){

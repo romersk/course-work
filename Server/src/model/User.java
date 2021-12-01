@@ -44,7 +44,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "User = {" +
                 "id=" + idUser +
                 ", id_person=" + idPerson +
                 ", login=" + login +

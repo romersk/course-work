@@ -39,7 +39,7 @@ public class WorkPlace implements Serializable {
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "WorkPlace = {" +
                 "id=" + idWorkPlace +
                 ", name=" + name +
                 ", address=" + address +

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="427.0" prefWidth="678.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.mainpage.UserPage">
+   <children>
+      <Button fx:id="buttToBack" layoutX="519.0" layoutY="24.0" mnemonicParsing="false" onAction="#toBack" text="Вернуться назад" />
+      <Label layoutX="40.0" layoutY="24.0" text="Меню пользователя">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Button fx:id="buttDirectPicework" layoutX="369.0" layoutY="123.0" mnemonicParsing="false" onAction="#toCalculateDP" prefHeight="41.0" prefWidth="201.0" text="Прямая сдельная" />
+      <Button fx:id="buttIndirPiece" layoutX="369.0" layoutY="178.0" mnemonicParsing="false" onAction="#toCalculateIP" prefHeight="41.0" prefWidth="201.0" text="Косвенно-сдельная" />
+      <Button fx:id="buttPiecePremium" layoutX="369.0" layoutY="232.0" mnemonicParsing="false" onAction="#toCalculatePP" prefHeight="41.0" prefWidth="201.0" text="Сдельно-премиальная" />
+      <Button fx:id="buttSimpleTIme" layoutX="369.0" layoutY="283.0" mnemonicParsing="false" onAction="#toCalculateST" prefHeight="41.0" prefWidth="201.0" text="Простая повременная" />
+      <Button fx:id="buttTimePremium" layoutX="369.0" layoutY="337.0" mnemonicParsing="false" onAction="#toCalculateDTP" prefHeight="41.0" prefWidth="201.0" text="Повременно-премиальная" />
+      <Label layoutX="369.0" layoutY="81.0" text="Выбор системы расчета з/п">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="buttPersonal" layoutX="40.0" layoutY="178.0" mnemonicParsing="false" onAction="#toShowPersonal" prefHeight="41.0" prefWidth="304.0" text="Управление персональной информации" />
+      <Button fx:id="buttHistory" layoutX="40.0" layoutY="232.0" mnemonicParsing="false" onAction="#toShowHistory" prefHeight="41.0" prefWidth="304.0" text="Взаимодействие с историей расчета з/п" />
+      <Label layoutX="40.0" layoutY="144.0" text="Основное меню">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

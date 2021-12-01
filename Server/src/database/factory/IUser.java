@@ -7,8 +7,9 @@ import java.util.ArrayList;
 
 public interface IUser {
     void update(User obj, int id);
-    void insert(User obj);
+    int insert(User obj);
     User selectUser(String login, String password) throws SQLException;
+    User selectUserByLogin(String login) throws SQLException;
     void delete(int id);
     ArrayList<User> findAll() throws SQLException;
 }

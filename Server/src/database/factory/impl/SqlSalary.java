@@ -3,7 +3,6 @@ package database.factory.impl;
 import database.MyDatabase;
 import database.factory.ISalary;
 import model.Salary;
-import model.WorkPlace;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

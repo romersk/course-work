@@ -6,8 +6,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface IWorkPlace {
-    void insert(WorkPlace obj);
-    WorkPlace selectWorkPlace(int id) throws SQLException;
+    int insert(WorkPlace obj);
+    void update(WorkPlace obj, int id);
+    WorkPlace selectWorkPlace(String name) throws SQLException;
     void delete(int id);
     ArrayList<WorkPlace> findAll() throws SQLException;
 }

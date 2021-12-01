@@ -32,9 +32,24 @@ public class MyDatabase{
         return instance;
     }
 
-    public void insert(String query) {
+    public ArrayList<String[]> insert(String query) {
         Command command = new InsertCommand(query, statemnt);
-        command.execute();
+        ArrayList<String[]> result = new ArrayList<String[]>();
+        try {
+            ResultSet resultSet = command.execute().getResultSet();
+            int count = resultSet.getMetaData().getColumnCount();
+
+            while (resultSet.next()) {
+                String[] arrayString = new String[count];
+                for (int i = 1;  i <= count; i++)
+                    arrayString[i - 1] = resultSet.getString(i);
+
+                result.add(arrayString);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public ArrayList<String[]> select(String query) throws SQLException {

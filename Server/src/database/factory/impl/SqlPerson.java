@@ -25,18 +25,17 @@ public class SqlPerson implements IPerson {
     }
 
     @Override
-    public void insert(Person obj) {
+    public int insert(Person obj) {
         String str = "INSERT INTO person (id_user, id_place, first_name, last_name, address) VALUES("
-                + obj.getIdUser() + "," + obj.getIdWorkPlace() + ",'" + obj.getFirstName() + "','"
-                + obj.getLastName() + "','" + obj.getAddress() + "')";
-        dbConnection.insert(str);
+                + obj.getIdUser() + ", "+ obj.getIdWorkPlace() + ",'" + obj.getFirstName() + "','"
+                + obj.getLastName() + "','" + obj.getAddress() + "') RETURNING id";
+        ArrayList<String[]> result = dbConnection.insert(str);
+        return Integer.parseInt(result.get(0)[0]);
     }
 
     @Override
     public void update(Person obj, int id) {
-        String str = "UPDATE person SET person.id_user="
-                + obj.getIdUser()
-                + ", person.id_place="
+        String str = "UPDATE person SET person.id_place="
                 + obj.getIdWorkPlace()
                 + ", person.first_name='"
                 + obj.getFirstName()

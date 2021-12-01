@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface IPerson {
-    void insert(Person obj);
+    int insert(Person obj);
     void update(Person obj, int id);
     Person selectPerson(int id) throws SQLException;
     void delete(int id);

@@ -25,12 +25,10 @@ CREATE TABLE IF NOT EXISTS person (
 	last_name VARCHAR(50),
 	address VARCHAR(30),
 	PRIMARY KEY(id),
-	FOREIGN KEY(id_place) REFERENCES work_place(id)
+	FOREIGN KEY(id_place) REFERENCES work_place(id) ON DELETE CASCADE
 );
 
-
-ALTER TABLE user_type ADD FOREIGN KEY (id_person) REFERENCES person(id);
-ALTER TABLE person ADD FOREIGN KEY (id_user) REFERENCES user_type(id);
+ALTER TABLE person ADD FOREIGN KEY (id_user) REFERENCES user_type(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 CREATE TABLE IF NOT EXISTS salary (
 	id INT AUTO_INCREMENT NOT NULL,
@@ -44,8 +42,15 @@ CREATE TABLE IF NOT EXISTS history (
 	id_user INT,
 	id_salary INT,
 	PRIMARY KEY(id),
-	FOREIGN KEY(id_user) REFERENCES user_type(id),
-	FOREIGN KEY(id_salary) REFERENCES salary(id)
+	FOREIGN KEY(id_user) REFERENCES user_type(id) ON DELETE CASCADE,
+	FOREIGN KEY(id_salary) REFERENCES salary(id) ON DELETE CASCADE
 );
 
+INSERT INTO work_place(name, address) VALUES ('ВаркХаус','ул.Платонова, 36');
+INSERT INTO work_place(name, address) VALUES ('КримДейв','ул.Шилковича, 2');
 INSERT INTO user_type(login, pass, role) VALUES ('root', 'root', 'Admin');
+INSERT INTO person(id_user, id_place, first_name, last_name, address) VALUES(1,1,'Эдгар','Тоомик','ул.Уральская, 37');
+
+UPDATE user_type
+SET user_type.id_person = 1
+WHERE user_type.id = 1;

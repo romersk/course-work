@@ -27,6 +27,10 @@ public class Client {
         writer.writeObject(choice);
     }
 
+    public void writeObject(Object obj) throws IOException {
+        writer.writeObject(obj);
+    }
+
     public String readLine() throws IOException {
         return objectInputStream.readLine();
     }

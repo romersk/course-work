@@ -39,7 +39,7 @@ public class History implements Serializable {
 
     @Override
     public String toString() {
-        return "History{" +
+        return "History = {" +
                 "id=" + idHistory +
                 ", id_user=" + idUser +
                 ", id_salary=" + idSalary +

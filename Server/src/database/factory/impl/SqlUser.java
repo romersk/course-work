@@ -34,22 +34,38 @@ public class SqlUser implements IUser {
                 + obj.getPassword()
                 + "', user_type.role='"
                 + obj.getRole()
-                + "'  WHERE user_type.id=" + id;
+                + "'  WHERE user_type.id=" + obj.getIdUser();
         dbConnection.update(str);
     }
 
     @Override
-    public void insert(User obj) {
-        String str = "INSERT INTO user_type (id_person, login, password, role) VALUES("
-                + obj.getIdPerson() + ",'" + obj.getLogin() + "','"
-                + obj.getPassword() + "','" + obj.getRole() + "')";
-        dbConnection.insert(str);
+    public int insert(User obj) {
+        String str = "INSERT INTO user_type (login, pass, role) VALUES('"
+                + obj.getLogin() + "','" + obj.getPassword() + "','"
+                + obj.getRole() + "') RETURNING id";
+        ArrayList<String[]> result = dbConnection.insert(str);
+        return Integer.parseInt(result.get(0)[0]);
     }
 
     @Override
     public User selectUser(String login, String password) throws SQLException {
-        String str = "SELECT * FROM user_type WHERE login='" + login
+        String str = "SELECT * FROM user_type JOIN person ON user_type.id = person.id WHERE login='" + login
                 + "' AND pass='" + password + "'";
+        ArrayList<String[]> result = dbConnection.select(str);
+        User user = new User();
+        for (String[] items: result){
+            user.setIdUser(Integer.parseInt(items[0]));
+            user.setIdPerson(Integer.parseInt(items[1]));
+            user.setLogin(items[2]);
+            user.setPassword(items[3]);
+            user.setRole(items[4]);
+        }
+        return user;
+    }
+
+    @Override
+    public User selectUserByLogin(String login) throws SQLException {
+        String str = "SELECT * FROM user_type WHERE login='" + login + "'";
         ArrayList<String[]> result = dbConnection.select(str);
         User user = new User();
         for (String[] items: result){
