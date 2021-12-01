@@ -77,11 +77,20 @@ public class WorkPlaceController {
     public void toAdd(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
         String nameStr = name.getText();
         String addressString = address.getText();
+        Data data = Data.getInstance();
 
         int countRequired = 0;
         if (nameStr.equals("")) {
             labelName.setText("Необходимо заполнить");
             countRequired++;
+        } else {
+            data.getClient().writeInt(4);
+            data.getClient().writeObject(nameStr);
+            WorkPlace workPlace = (WorkPlace) data.getClient().getObject();
+            if (workPlace.getIdWorkPlace() > 0) {
+                labelName.setText("Такая компания существует");
+                countRequired++;
+            }
         }
         if (addressString.equals("")) {
             labelAddress.setText("Необходимо заполнить");
@@ -98,7 +107,7 @@ public class WorkPlaceController {
         workPlace.setAddress(addressString);
         workPlace.setName(nameStr);
 
-        Data data = Data.getInstance();
+
         data.getClient().writeInt(5);
         data.getClient().writeObject("WorkPlace");
         data.getClient().writeObject(workPlace);
