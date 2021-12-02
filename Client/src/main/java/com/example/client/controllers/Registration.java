@@ -27,6 +27,7 @@ public class Registration {
     public PasswordField password;
     public ComboBox<String> workPlace;
     private final String TEXT_REGEX = "[А-Яа-яё]{2,30}";
+    private final String ENG_TEXT = "[A-Za-z]{5,15}";
     public Label labelForSurname;
     public Label labelForName;
     public Label labelForAddress;
@@ -135,13 +136,13 @@ public class Registration {
         } else {
             labelForSurname.setText("");
         }
-        if (name.getText().equals("") || !name.getText().matches(TEXT_REGEX)) {
+        if (name.getText().equals("") || !name.getText().matches(ENG_TEXT)) {
             labelForName.setText("Заполните поле");
             answer = false;
         } else {
             labelForName.setText("");
         }
-        if (address.getText().equals("") || !address.getText().matches(TEXT_REGEX)) {
+        if (address.getText().equals("")) {
             labelForAddress.setText("Заполните поле");
             answer = false;
         } else {
