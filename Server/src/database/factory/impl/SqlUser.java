@@ -51,21 +51,16 @@ public class SqlUser implements IUser {
     public User selectUser(String login, String password) throws SQLException {
         String str = "SELECT * FROM user_type JOIN person ON user_type.id = person.id WHERE login='" + login
                 + "' AND pass='" + password + "'";
-        ArrayList<String[]> result = dbConnection.select(str);
-        User user = new User();
-        for (String[] items: result){
-            user.setIdUser(Integer.parseInt(items[0]));
-            user.setIdPerson(Integer.parseInt(items[1]));
-            user.setLogin(items[2]);
-            user.setPassword(items[3]);
-            user.setRole(items[4]);
-        }
-        return user;
+        return setUserFromDB(str);
     }
 
     @Override
     public User selectUserByLogin(String login) throws SQLException {
         String str = "SELECT * FROM user_type WHERE login='" + login + "'";
+        return setUserFromDB(str);
+    }
+
+    private User setUserFromDB(String str) throws SQLException {
         ArrayList<String[]> result = dbConnection.select(str);
         User user = new User();
         for (String[] items: result){
@@ -82,6 +77,12 @@ public class SqlUser implements IUser {
     public void delete(int id) {
         String str = "DELETE FROM user_type WHERE id = " + id;
         dbConnection.delete(str);
+    }
+
+    @Override
+    public User selectUserById(int id) throws SQLException {
+        String str = "SELECT * FROM user_type WHERE id=" + id;
+        return setUserFromDB(str);
     }
 
     @Override

@@ -68,6 +68,12 @@ public class ServerWork {
                 out.writeObject(list);
                 break;
             }
+            case "History": {
+                IHistory iHistory = new SqlHistory();
+                ArrayList<History> list = iHistory.findAll();
+                out.writeObject(list);
+                break;
+            }
             default:
                 break;
         }
@@ -89,6 +95,12 @@ public class ServerWork {
                 iUser.delete(id);
                 break;
             }
+            case "Salary":
+            {
+                ISalary iSalary = new SqlSalary();
+                iSalary.delete(id);
+                break;
+            }
             default:
                 break;
         }
@@ -104,6 +116,20 @@ public class ServerWork {
                 IPerson iPerson = new SqlPerson();
                 Person person = iPerson.selectPerson(id);
                 out.writeObject(person);
+                break;
+            }
+            case "Salary":
+            {
+                ISalary iSalary = new SqlSalary();
+                Salary salary = iSalary.selectSalary(id);
+                out.writeObject(salary);
+                break;
+            }
+            case "User":
+            {
+                IUser iUser = new SqlUser();
+                User user = iUser.selectUserById(id);
+                out.writeObject(user);
                 break;
             }
             default:

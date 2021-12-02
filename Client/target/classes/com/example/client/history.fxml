@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="491.0" prefWidth="661.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.HistoryTable">
+   <children>
+      <Button fx:id="buttBack" layoutX="512.0" layoutY="14.0" mnemonicParsing="false" onAction="#toBack" text="Вернуться назад" />
+      <TableView fx:id="tableHistory" layoutX="39.0" layoutY="62.0" prefHeight="280.0" prefWidth="583.0">
+        <columns>
+          <TableColumn fx:id="columnName" prefWidth="117.0" text="Имя" />
+            <TableColumn fx:id="columnSurname" prefWidth="169.0" text="Фамилия" />
+            <TableColumn fx:id="columnMethod" prefWidth="183.0" text="Система расчета" />
+            <TableColumn fx:id="columnSize" prefWidth="113.0" text="Размер з/п" />
+        </columns>
+      </TableView>
+      <Label layoutX="39.0" layoutY="18.0" text="История расчетов з/п">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="buttDel" layoutX="533.0" layoutY="361.0" mnemonicParsing="false" onAction="#toDelete" prefHeight="24.0" prefWidth="89.0" text="Удалить" />
+      <Button fx:id="buttGraph" layoutX="406.0" layoutY="432.0" mnemonicParsing="false" onAction="#toGraph" prefHeight="36.0" prefWidth="216.0" text="Создать графический отчет" />
+      <ComboBox fx:id="allMethods" layoutX="39.0" layoutY="385.0" prefHeight="30.0" prefWidth="150.0" promptText="по системе" />
+      <TextField fx:id="sizeField" layoutX="39.0" layoutY="438.0" prefHeight="30.0" prefWidth="150.0" promptText="по размеру" />
+      <Button fx:id="buttFilter" layoutX="212.0" layoutY="441.0" mnemonicParsing="false" onAction="#toFilter" text="Фильтровать" />
+      <Label layoutX="39.0" layoutY="352.0" text="Фильтрация">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="label" layoutX="39.0" layoutY="424.0" prefHeight="16.0" prefWidth="150.0" textFill="RED" />
+   </children>
+</AnchorPane>

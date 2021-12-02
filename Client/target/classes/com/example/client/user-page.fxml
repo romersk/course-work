@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="427.0" prefWidth="678.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.mainpage.UserPage">
+<AnchorPane prefHeight="427.0" prefWidth="678.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.client.controllers.UserPage">
    <children>
       <Button fx:id="buttToBack" layoutX="519.0" layoutY="24.0" mnemonicParsing="false" onAction="#toBack" text="Вернуться назад" />
       <Label layoutX="40.0" layoutY="24.0" text="Меню пользователя">

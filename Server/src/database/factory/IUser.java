@@ -11,5 +11,6 @@ public interface IUser {
     User selectUser(String login, String password) throws SQLException;
     User selectUserByLogin(String login) throws SQLException;
     void delete(int id);
+    User selectUserById(int id) throws SQLException;
     ArrayList<User> findAll() throws SQLException;
 }
